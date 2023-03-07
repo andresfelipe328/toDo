@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{% block content %}
+
+   <main class="home-container">
+      <div class="services">
+         <div class="row">
+            
+               <a class="box create-list" href="{% url 'create-taskList' %}">
+                  <i class="fas fa-plus"></i>
+               </a>
+
+            <a class="box display-list" href="{% url 'display-taskLists' %}">
+               <i class="fas fa-list"></i>
+            </a>
+         </div>
+         <div class="row">
+
+            <a class="box completed-tasks" href="taskList-completed">
+               <i class="fas fa-check-double"></i>
+            </a>
+
+            <a class="box ongoing-tasks" href="taskList-completion">
+               <i class="fas fa-exclamation"></i>
+            </a>
+         </div>
+      </div>
+   </main>
+
+{% endblock content %}

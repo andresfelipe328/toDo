@@ -1,0 +1,83 @@
+{% extends 'index.html' %}
+{% block content %}
+
+   <main class="login_register-form">
+      {% if page == 'login' %}
+      
+         <div class="layout-container" style="height:450px">
+            <div class="layout-header">
+               <h2>Login</h2>
+            </div>
+            <form class="form" action="" method="POST">
+               {% csrf_token %}
+               <div class="email">
+                  <label for="email">Email:</label>
+                  <input id="username" name="email" type="text" placeholder="example@email.com" required/>
+               </div>
+               <div class="password">
+                  <label for="password">Password:</label>
+                  <input
+                     id="password"
+                     name="password"
+                     type="password"
+                     placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                     required
+                  />
+               </div>
+      
+               <button class="btn btn--main" type="submit">
+                 Login
+               </button>
+            </form>
+
+            <div class="auth__action">
+               <p>Haven't signed up yet?</p>
+               <a href="{% url 'register' %}" class="btn btn--link">Sign Up</a>
+            </div>
+
+            {% if messages %}
+               <ul class="messages">
+                  {% for message in messages %}
+                     <li>{{ message }}</li>
+                  {% endfor %}
+               </ul>
+            {% endif %}
+
+         </div>
+
+      {% else %}
+
+         <div class="layout-container">
+            <div class="layout-header">
+               <h2>Sign Up</h2>
+            </div>
+            <form class="form" action="" method="POST" autocomplete="off">
+               {% csrf_token %}
+               {% for field in form %}
+                  <div class="form__group form__group">
+                     <label>{{field.label}}:</label>
+                     {{field}}
+                  </div>
+               {% endfor %}
+               <button class="btn btn--main" type="submit">Sign up</button>
+            </form>
+            
+
+            <div class="auth__action">
+               <p>Already signed up yet?</p>
+               <a href="{% url 'login' %}" class="btn btn--link">Login</a>
+            </div>
+
+            {% if messages %}
+               <ul class="messages">
+                  {% for message in messages %}
+                     <li>{{ message }}</li>
+                  {% endfor %}
+               </ul>
+            {% endif %}
+         </div>
+
+      {% endif %}
+   </main>
+
+{% endblock content %}

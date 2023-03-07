@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% block content %}
+
+   <main class="display-lists">
+      <div class="layout-container">
+         <div class="taskList-header">
+            <div class="back">
+               <a class="back-btn" href="{% url 'home' %}">
+                  <i class="fas fa-caret-left"></i>
+               </a>
+            </div>
+            <h2>Task Lists</h2>
+         </div>
+
+         <div class="taskList-wrapper">
+            {% for list in taskList %}
+               <div class="listName">
+                  <a class="list-opt" class="taskList_link" href="{% url 'update-taskList' list.name %}">{{list.name}}</a>
+                  <div class="edits">
+                     <form action="" method="POST">
+                        {% csrf_token %}
+                        <input type="text" value={{list.id}} name='delete' style="display:none">
+                        <button type="submit"><i class="fas fa-trash"></i></button>
+                     </form>
+                  </div>
+               </div>
+            {% endfor %}
+         </div>
+
+      </div>
+   </main>
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+{% block content %}
+
+   <main class="taskListPerc">
+      <div class="layout-container">
+         <div class="taskList-header">
+            <div class="back">
+               <a class="back-btn" href="{% url 'home' %}">
+                  <i class="fas fa-caret-left"></i>
+               </a>
+            </div>
+            <h2>{{pageTitle}}</h2>
+         </div>
+         {% for key, value in listPerc.items %}
+            <div class="taskList-bar">
+               <h3> {{key}}</h3>
+               <div class="bar-wrapper">
+                  <div class="bar" style="width: {{value}}%"></div>
+               </div>
+            </div>
+         {% endfor %}
+
+      </div>
+   </main>
+
+{% endblock content %}
+
+<!-- {% for key, value in listPerc.items %}
+   <p> {{key}} {{value}}</p>
+{% endfor %} -->

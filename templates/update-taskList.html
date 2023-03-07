@@ -1,0 +1,59 @@
+{% extends 'index.html' %}
+{% block content %}
+
+      <main class="updateTaskList">
+         <div class="layout-container">
+            <div class="taskList-header">
+               <div class="back">
+                  <a class="back-btn" href="{% url 'display-taskLists' %}">
+                     <i class="fas fa-caret-left"></i>
+                  </a>
+               </div>
+               <div class="back-back">
+                  <a class="back-btn" href="{% url 'home' %}">
+                     <i class="fas fa-backward"></i>
+                  </a>
+               </div>
+               <h2>{{taskList.name}}</h2>
+            </div>
+
+            <div class="create-task">
+               <form class="form" action="" method="POST" autocomplete="off">
+                  {% csrf_token %}
+                  <input type="text" name="item" placeholder="Create Task" required/>
+                  <button class="btn btn--main" type="submit">
+                     <i class="fas fa-plus"></i>
+                  </button>
+               </form>
+            </div>
+
+            <div class="tasks">
+               {% for item in tasks %}
+                  <div class="item">
+                     <p>{{item.item}}</p>
+                     <div class="edits">
+                        <form action="" method="POST">
+                           {% csrf_token %}
+                           <input type="text" value={{item.id}} name='delete' style="display:none"/>
+                           <button type="submit"><i class="fas fa-trash"></i></button>
+                        </form>
+
+                        <form action="" method="POST">
+                           {% csrf_token %}
+                           {% if item.status %}
+                              <input type="text" value={{item.id}} name='undone' style="display:none"/>
+                              <button type="submit"><i class="fas fa-check"></i></button>
+                        
+                           {% else %}
+                              <input type="text" value={{item.id}} name='done' style="display:none"/>
+                              <button type="submit"><i class="fas fa-times"></i></button>
+                           {% endif %}
+                        </form>
+                     </div>
+                  </div>
+               {% endfor %}
+            </div>
+
+         </div>
+      </main>
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% load static %}
+<header class="header">
+   <a href="{% url 'home' %}" class="logo-container">
+      <img class="logo-img" src="{% static 'img/appIcon.svg' %}" alt="logo">
+      <h1 class="logo-name">To-Do</h1>
+   </a>
+   <ul class="navlinks-container">
+      {% if request.user.is_authenticated %}
+         <button class="menu-btn" id="menu-btn"><i class="fas fa-sort-down"></i></button>
+         <div class="drop-menu" id="drop-menu">
+            <p class="hello-user">Hello @{{request.user.username}}</p>
+            <li><a class="drop-menu_links" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a class="drop-menu_links" href="#"><i class="fas fa-cog"></i> Settings</a></li>
+         </div>
+      {% else %}
+         <li><a href="{% url 'login' %}">Login</a></li>
+      {% endif %}
+   </ul>
+</header>
+
+{% block content %}
+
+<script>
+      function dropMenu() {
+      const dropdown_btn = document.querySelector('#menu-btn');
+      const drop_menu = document.querySelector('#drop-menu');
+
+      if (dropdown_btn) {
+         dropdown_btn.addEventListener("click", () => {
+            drop_menu.classList.toggle("show");
+         })
+      }
+   }
+
+   dropMenu();
+</script>
+
+{% endblock content %}
